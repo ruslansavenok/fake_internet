@@ -21,6 +21,7 @@ defmodule FakeInternetWeb.Router do
     scope "/admin" do
       resources "/categories", CategoryController
       resources "/questions", QuestionController
+      resources "/users", Admin.UserController
     end
   end
 

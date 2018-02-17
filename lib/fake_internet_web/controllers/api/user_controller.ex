@@ -7,7 +7,7 @@ defmodule FakeInternetWeb.Api.UserController do
   action_fallback FakeInternetWeb.FallbackController
 
   def sign_up(conn, user_params) do
-    with {:ok, %User{} = user} <- Accounts.create_user(user_params) do
+    with {:ok, %User{} = user} <- Accounts.sign_up_user(user_params) do
       reply_with_token(conn, user)
     end
   end

@@ -15,10 +15,10 @@ defmodule FakeInternet.Accounts.User do
   end
 
   @doc false
-  def changeset(%User{} = user, attrs) do
+  def changeset(%User{} = user, attrs, required_fields \\ []) do
     user
     |> cast(attrs, [:email, :password, :is_teacher, :is_admin])
-    |> validate_required([:email, :password])
+    |> validate_required([:email] ++ required_fields)
     |> unique_constraint(:email)
     |> validate_format(:email, ~r/@/)
     |> validate_length(:password, min: 5)
