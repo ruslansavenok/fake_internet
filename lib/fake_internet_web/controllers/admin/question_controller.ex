@@ -12,7 +12,6 @@ defmodule FakeInternetWeb.QuestionController do
 
   def new(conn, _params) do
     changeset = Questions.change_question(%Question{})
-    IO.inspect Categories.list_categories()
     render(conn, "new.html",
       changeset: changeset,
       categories: Categories.list_categories()

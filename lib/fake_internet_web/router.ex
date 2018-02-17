@@ -22,6 +22,7 @@ defmodule FakeInternetWeb.Router do
       resources "/categories", CategoryController
       resources "/questions", QuestionController
       resources "/users", Admin.UserController
+      resources "/tests", Admin.TestController
     end
   end
 
