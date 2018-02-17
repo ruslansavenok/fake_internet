@@ -27,9 +27,8 @@ pre_erlang_clean_compile() {
   status "Running phoenix.digest"
   __sync_remote "
     source ~/.profile
-    nvm -v
-    node -v
     set -e
+
     cd '$BUILD_AT'
     mkdir -p priv/static
 
