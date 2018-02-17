@@ -35,7 +35,7 @@ defmodule FakeInternet.Questions do
       ** (Ecto.NoResultsError)
 
   """
-  def get_question!(id), do: Repo.get!(Question, id)
+  def get_question!(id), do: Repo.get!(Question, id) |> Repo.preload(:answers)
 
   @doc """
   Creates a question.

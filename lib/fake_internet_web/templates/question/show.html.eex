@@ -18,5 +18,22 @@
 
 </ul>
 
+<table class="table">
+  <thead>
+    <tr>
+      <th>Label</th>
+      <th>is correct?</th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for answer <- @question.answers do %>
+    <tr>
+      <td><%= answer.label %></td>
+      <td><%= answer.is_correct %></td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
 <span><%= link "Edit", to: question_path(@conn, :edit, @question) %></span>
 <span><%= link "Back", to: question_path(@conn, :index) %></span>
