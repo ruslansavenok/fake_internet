@@ -4,7 +4,7 @@
   <thead>
     <tr>
       <th>Name</th>
-
+      <th>User id</th>
       <th></th>
     </tr>
   </thead>
@@ -12,6 +12,7 @@
 <%= for test <- @tests do %>
     <tr>
       <td><%= test.name %></td>
+      <td><%= FakeInternet.Accounts.get_user!(test.user_id).email %></td>
 
       <td class="text-right">
         <span><%= link "Show", to: test_path(@conn, :show, test), class: "btn btn-default btn-xs" %></span>

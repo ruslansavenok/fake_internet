@@ -21,6 +21,12 @@ defmodule FakeInternet.Tests do
     Repo.all(Test)
   end
 
+  def list_user_tests(user_id) do
+    Test
+    |> where(user_id: ^user_id)
+    |> Repo.all()
+  end
+
   @doc """
   Gets a single test.
 
