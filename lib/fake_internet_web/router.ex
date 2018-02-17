@@ -16,9 +16,8 @@ defmodule FakeInternetWeb.Router do
   scope "/", FakeInternetWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
-
     scope "/admin" do
+      get "/", Admin.PageController, :index
       resources "/categories", CategoryController
       resources "/questions", QuestionController
       resources "/users", Admin.UserController

@@ -1,4 +1,4 @@
-defmodule FakeInternetWeb.PageController do
+defmodule FakeInternetWeb.Admin.PageController do
   use FakeInternetWeb, :controller
 
   def index(conn, _params) do
