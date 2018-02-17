@@ -44,7 +44,8 @@ defmodule FakeInternet.Mixfile do
       {:edeliver, "~> 1.4.5"},
       {:distillery, "~> 1.0.0", warn_missing: false},
       {:comeonin, "~> 4.0"},
-      {:bcrypt_elixir, "~> 1.0"}
+      {:bcrypt_elixir, "~> 1.0"},
+      {:cors_plug, "~> 1.5"}
     ]
   end
 

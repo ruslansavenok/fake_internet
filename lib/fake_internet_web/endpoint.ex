@@ -38,6 +38,7 @@ defmodule FakeInternetWeb.Endpoint do
     key: "_fake_internet_key",
     signing_salt: "GgPpD8Kz"
 
+  plug CORSPlug
   plug FakeInternetWeb.Router
 
   @doc """
