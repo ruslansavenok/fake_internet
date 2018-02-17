@@ -17,4 +17,10 @@ defmodule FakeInternetWeb.FallbackController do
     |> put_status(:not_found)
     |> render(FakeInternetWeb.ErrorView, :"404")
   end
+
+  def call(conn, {:error, message}) do
+    conn
+    |> put_status(:bad_request)
+    |> json(%{error: message})
+  end
 end

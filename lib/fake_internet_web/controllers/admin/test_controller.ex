@@ -4,6 +4,7 @@ defmodule FakeInternetWeb.Admin.TestController do
   alias FakeInternet.Tests
   alias FakeInternet.Tests.Test
   alias FakeInternet.Accounts
+  alias FakeInternet.Questions
 
   def index(conn, _params) do
     tests = Tests.list_tests()
@@ -11,9 +12,9 @@ defmodule FakeInternetWeb.Admin.TestController do
   end
 
   def new(conn, _params) do
-    changeset = Tests.change_test(%Test{})
     render(conn, "new.html",
-      changeset: changeset,
+      questions: Questions.list_questions(),
+      changeset: Tests.change_test(%Test{}),
       users: Accounts.list_users()
     )
   end
@@ -26,6 +27,7 @@ defmodule FakeInternetWeb.Admin.TestController do
         |> redirect(to: test_path(conn, :show, test))
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html",
+          questions: Questions.list_questions(),
           changeset: changeset,
           users: Accounts.list_users()
         )
@@ -39,10 +41,11 @@ defmodule FakeInternetWeb.Admin.TestController do
 
   def edit(conn, %{"id" => id}) do
     test = Tests.get_test!(id)
-    changeset = Tests.change_test(test)
+
     render(conn, "edit.html",
       test: test,
-      changeset: changeset,
+      questions: Questions.list_questions(),
+      changeset: Tests.change_test(test),
       users: Accounts.list_users()
     )
   end
@@ -59,6 +62,7 @@ defmodule FakeInternetWeb.Admin.TestController do
         render(conn, "edit.html",
           test: test,
           changeset: changeset,
+          questions: Questions.list_questions(),
           users: Accounts.list_users()
         )
     end

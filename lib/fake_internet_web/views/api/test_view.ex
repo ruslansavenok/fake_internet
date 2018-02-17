@@ -9,7 +9,9 @@ defmodule FakeInternetWeb.Api.TestView do
   def render("test.json", %{test: test}) do
     %{
       id: test.id,
-      name: test.name
+      user_id: test.user_id,
+      name: test.name,
+      question_ids: test.question_ids
     }
   end
 end
