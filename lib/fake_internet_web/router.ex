@@ -14,14 +14,14 @@ defmodule FakeInternetWeb.Router do
   end
 
   scope "/", FakeInternetWeb do
-    pipe_through :browser # Use the default browser stack
+    pipe_through :browser
 
     get "/", PageController, :index
-    resources "/users", UserController, except: [:new, :edit]
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", FakeInternetWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", FakeInternetWeb.Api do
+    pipe_through :api
+    post "/sign_up", UserController, :sign_up
+    post "/sign_in", UserController, :sign_in
+  end
 end

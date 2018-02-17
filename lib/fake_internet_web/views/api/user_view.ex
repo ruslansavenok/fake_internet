@@ -1,4 +1,4 @@
-defmodule FakeInternetWeb.UserView do
+defmodule FakeInternetWeb.Api.UserView do
   use FakeInternetWeb, :view
   alias FakeInternetWeb.UserView
 
@@ -13,7 +13,6 @@ defmodule FakeInternetWeb.UserView do
   def render("user.json", %{user: user}) do
     %{id: user.id,
       email: user.email,
-      encrypted_password: user.encrypted_password,
       is_teacher: user.is_teacher,
       is_admin: user.is_admin}
   end

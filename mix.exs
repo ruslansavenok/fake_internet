@@ -42,7 +42,9 @@ defmodule FakeInternet.Mixfile do
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
       {:edeliver, "~> 1.4.5"},
-      {:distillery, "~> 1.0.0", warn_missing: false}
+      {:distillery, "~> 1.0.0", warn_missing: false},
+      {:comeonin, "~> 4.0"},
+      {:bcrypt_elixir, "~> 1.0"}
     ]
   end
 

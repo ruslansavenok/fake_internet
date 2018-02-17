@@ -7,6 +7,7 @@ defmodule FakeInternet.Accounts.User do
   schema "users" do
     field :email, :string
     field :encrypted_password, :string
+    field :password, :string, virtual: true
     field :is_admin, :boolean, default: false
     field :is_teacher, :boolean, default: false
 
@@ -16,7 +17,16 @@ defmodule FakeInternet.Accounts.User do
   @doc false
   def changeset(%User{} = user, attrs) do
     user
-    |> cast(attrs, [:email, :encrypted_password, :is_teacher, :is_admin])
-    |> validate_required([:email, :encrypted_password, :is_teacher, :is_admin])
+    |> cast(attrs, [:email, :password, :is_teacher, :is_admin])
+    |> validate_required([:email, :password])
+    |> unique_constraint(:email)
+    |> validate_format(:email, ~r/@/)
+    |> validate_length(:password, min: 5)
+    |> put_pass_hash()
   end
+
+  defp put_pass_hash(%Ecto.Changeset{valid?: true, changes: %{password: password}} = changeset) do
+    change(changeset, Comeonin.Bcrypt.add_hash(password, hash_key: :encrypted_password))
+  end
+  defp put_pass_hash(changeset), do: changeset
 end
