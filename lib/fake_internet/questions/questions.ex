@@ -50,9 +50,16 @@ defmodule FakeInternet.Questions do
 
   """
   def create_question(attrs \\ %{}) do
-    %Question{}
+    image = attrs["image"]
+    attrs = Map.delete(attrs, "image")
+
+    result = %Question{}
     |> Question.changeset(attrs)
     |> Repo.insert()
+
+    with {:ok, question} <- result do
+      update_question(question, %{image: image})
+    end
   end
 
   @doc """
