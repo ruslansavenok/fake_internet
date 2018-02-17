@@ -32,6 +32,10 @@ defmodule FakeInternetWeb.Router do
 
     scope "/tests" do
       get "/", TestController, :index
+      post "/create", TestController, :create
+      get "/questions", QuestionController, :index
     end
+
+    get "/categories", CategoryController, :index
   end
 end

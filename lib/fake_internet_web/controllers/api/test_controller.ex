@@ -17,4 +17,19 @@ defmodule FakeInternetWeb.Api.TestController do
         |> json(%{error: "Invalid user"})
     end
   end
+
+
+  def create(conn, test_params) do
+    [authorization_header] = get_req_header(conn, "authorization")
+    authorization_token = String.replace(authorization_header, "Bearer ", "")
+
+    case Phoenix.Token.verify(conn, "user_token", authorization_token) do
+      {:ok, user_id} ->
+        json(conn, test_params)
+      {:error, _} ->
+        conn
+        |> put_status(:bad_request)
+        |> json(%{error: "Invalid user"})
+    end
+  end
 end
