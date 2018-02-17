@@ -22,7 +22,8 @@ defmodule FakeInternetWeb.Api.UserController do
   # TODO: View
   defp reply_with_token(conn, user) do
     json(conn, %{
-      token: Phoenix.Token.sign(conn, "user_token", user.encrypted_password)
+      token: Phoenix.Token.sign(conn, "user_token", user.encrypted_password),
+      is_teacher: user.is_teacher
     })
   end
 end
