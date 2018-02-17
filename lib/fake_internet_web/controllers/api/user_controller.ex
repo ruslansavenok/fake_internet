@@ -15,7 +15,10 @@ defmodule FakeInternetWeb.Api.UserController do
   def sign_in(conn, %{"email" => email, "password" => password}) do
     case Accounts.get_by_email_and_password(email, password) do
       {:ok, %User{} = user} -> reply_with_token(conn, user)
-      {:error, _} -> json(conn, %{error: "Invalid email or password"})
+      {:error, _} ->
+        conn
+        |> put_status(:bad_request)
+        |> json(%{error: "Invalid email or password"})
     end
   end
 
