@@ -20,7 +20,12 @@ defmodule FakeInternet.Mixfile do
   def application do
     [
       mod: {FakeInternet.Application, []},
-      extra_applications: [:logger, :runtime_tools, :edeliver]
+      extra_applications: [
+        :logger,
+        :runtime_tools,
+        :edeliver,
+        :arc_ecto
+      ]
     ]
   end
 
@@ -45,7 +50,9 @@ defmodule FakeInternet.Mixfile do
       {:distillery, "~> 1.0.0", warn_missing: false},
       {:comeonin, "~> 4.0"},
       {:bcrypt_elixir, "~> 1.0"},
-      {:cors_plug, "~> 1.5"}
+      {:cors_plug, "~> 1.5"},
+      {:arc, "~> 0.8.0"},
+      {:arc_ecto, "~> 0.7.0"}
     ]
   end
 

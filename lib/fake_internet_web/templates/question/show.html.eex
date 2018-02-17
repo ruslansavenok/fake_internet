@@ -7,6 +7,15 @@
     <%= @question.question %>
   </li>
 
+  <li>
+    <strong>Image</strong>
+    <br />
+    <%= img_tag FakeInternet.QuestionImage.url({
+      @question.image,
+      @question
+    })%>
+  </li>
+
 </ul>
 
 <span><%= link "Edit", to: question_path(@conn, :edit, @question) %></span>
