@@ -24,7 +24,7 @@ defmodule FakeInternet.Tests do
   def list_user_tests(user_id) do
     Test
     |> where(user_id: ^user_id)
-    |> Repo.preload(submissions: :answers)
+    |> preload(submissions: :answers)
     |> Repo.all()
   end
 

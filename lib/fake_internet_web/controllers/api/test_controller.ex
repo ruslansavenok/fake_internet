@@ -20,6 +20,13 @@ defmodule FakeInternetWeb.Api.TestController do
   end
 
 
+  def show(conn, %{"test_id" => test_id}) do
+    render(conn, "test.json",
+      test: Tests.get_test!(test_id)
+    )
+  end
+
+
   def create(conn, test_params) do
     [authorization_header] = get_req_header(conn, "authorization")
     authorization_token = String.replace(authorization_header, "Bearer ", "")
