@@ -1,13 +1,14 @@
 defmodule FakeInternet.Tests.Test do
   use Ecto.Schema
   import Ecto.Changeset
-  alias FakeInternet.Tests.Test
+  alias FakeInternet.Tests.{Test, TestSubmission}
 
 
   schema "tests" do
     field :name, :string
     field :user_id, :id
     field :question_ids, {:array, :integer}
+    has_many :submissions, TestSubmission
 
     timestamps()
   end

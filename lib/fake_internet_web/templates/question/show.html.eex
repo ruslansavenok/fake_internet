@@ -21,6 +21,7 @@
 <table class="table">
   <thead>
     <tr>
+      <th>Id</th>
       <th>Label</th>
       <th>is correct?</th>
     </tr>
@@ -28,6 +29,7 @@
   <tbody>
 <%= for answer <- @question.answers do %>
     <tr>
+      <td><%= answer.id %></td>
       <td><%= answer.label %></td>
       <td><%= answer.is_correct %></td>
     </tr>

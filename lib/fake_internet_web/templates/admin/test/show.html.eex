@@ -9,5 +9,39 @@
 
 </ul>
 
+<table class="table">
+  <tr>
+    <th>id</th>
+    <th>user</th>
+    <th></th>
+  </tr>
+<%= for submission <- @test.submissions do %>
+  <tr>
+    <td><%= submission.id %></td>
+    <td><%= FakeInternet.Accounts.get_user!(submission.user_id).email %></td>
+    <td>
+      <table class="table">
+        <tr>
+          <th>Question</th>
+          <th>Answer</th>
+        </tr>
+      <%= for answer <- submission.answers do %>
+        <tr>
+          <td>
+            <%= FakeInternet.Questions.get_question!(answer.question_id).question %>
+          </td>
+          <td>
+            <%= Enum.find(FakeInternet.Questions.get_question!(answer.question_id).answers, fn a ->
+              a.id == answer.answer_id
+            end).label %>
+          </td>
+        <tr>
+      <% end %>
+      </table>
+    </td>
+  </tr>
+<% end %>
+</table>
+
 <span><%= link "Edit", to: test_path(@conn, :edit, @test) %></span>
 <span><%= link "Back", to: test_path(@conn, :index) %></span>

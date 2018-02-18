@@ -1,7 +1,7 @@
 defmodule FakeInternetWeb.Api.TestController do
   use FakeInternetWeb, :controller
   alias FakeInternet.Tests
-  alias FakeInternet.Tests.Test
+  alias FakeInternet.Tests.{Test, TestSubmission}
 
   action_fallback FakeInternetWeb.FallbackController
 
@@ -19,6 +19,7 @@ defmodule FakeInternetWeb.Api.TestController do
     end
   end
 
+
   def create(conn, test_params) do
     [authorization_header] = get_req_header(conn, "authorization")
     authorization_token = String.replace(authorization_header, "Bearer ", "")
@@ -26,6 +27,19 @@ defmodule FakeInternetWeb.Api.TestController do
     # TODO: Multiline with??
     with {:ok, user_id} <- Phoenix.Token.verify(conn, "user_token", authorization_token),
          {:ok, %Test{} = test} <- Map.merge(test_params, %{"user_id" => user_id}) |> Tests.create_test do
+      render(conn, "test.json", test: test)
+    end
+  end
+
+
+  def submit(conn, submission_params) do
+    [authorization_header] = get_req_header(conn, "authorization")
+    authorization_token = String.replace(authorization_header, "Bearer ", "")
+
+    with {:ok, user_id} <- Phoenix.Token.verify(conn, "user_token", authorization_token),
+         %Test{} = test <- Tests.get_test!(submission_params["test_id"]),
+         {:ok, %TestSubmission{} = submission} <- Map.merge(submission_params, %{"user_id" => user_id}) |> Tests.submit_test
+    do
       render(conn, "test.json", test: test)
     end
   end

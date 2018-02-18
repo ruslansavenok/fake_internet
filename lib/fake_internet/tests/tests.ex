@@ -6,7 +6,7 @@ defmodule FakeInternet.Tests do
   import Ecto.Query, warn: false
   alias FakeInternet.Repo
 
-  alias FakeInternet.Tests.Test
+  alias FakeInternet.Tests.{Test, TestSubmission, TestSubmissionAnswer}
 
   @doc """
   Returns the list of tests.
@@ -18,12 +18,13 @@ defmodule FakeInternet.Tests do
 
   """
   def list_tests do
-    Repo.all(Test)
+    Repo.all(Test) |> Repo.preload(submissions: :answers)
   end
 
   def list_user_tests(user_id) do
     Test
     |> where(user_id: ^user_id)
+    |> Repo.preload(submissions: :answers)
     |> Repo.all()
   end
 
@@ -41,7 +42,9 @@ defmodule FakeInternet.Tests do
       ** (Ecto.NoResultsError)
 
   """
-  def get_test!(id), do: Repo.get!(Test, id)
+  def get_test!(id) do
+    Repo.get!(Test, id) |> Repo.preload(submissions: :answers)
+  end
 
   @doc """
   Creates a test.
@@ -58,6 +61,12 @@ defmodule FakeInternet.Tests do
   def create_test(attrs \\ %{}) do
     %Test{}
     |> Test.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def submit_test(attrs \\ %{}) do
+    %TestSubmission{}
+    |> TestSubmission.changeset(attrs)
     |> Repo.insert()
   end
 

@@ -34,6 +34,7 @@ defmodule FakeInternetWeb.Router do
       get "/", TestController, :index
       post "/create", TestController, :create
       get "/questions", QuestionController, :index
+      post "/:test_id/submit", TestController, :submit
     end
 
     get "/categories", CategoryController, :index
