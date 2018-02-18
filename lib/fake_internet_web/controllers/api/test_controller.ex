@@ -44,8 +44,8 @@ defmodule FakeInternetWeb.Api.TestController do
     authorization_token = String.replace(authorization_header, "Bearer ", "")
 
     with {:ok, user_id} <- Phoenix.Token.verify(conn, "user_token", authorization_token),
-         %Test{} = test <- Tests.get_test!(submission_params["test_id"]),
-         {:ok, %TestSubmission{} = submission} <- Map.merge(submission_params, %{"user_id" => user_id}) |> Tests.submit_test
+         {:ok, %TestSubmission{} = submission} <- Map.merge(submission_params, %{"user_id" => user_id}) |> Tests.submit_test,
+         %Test{} = test <- Tests.get_test!(submission_params["test_id"])
     do
       render(conn, "test.json", test: test)
     end
