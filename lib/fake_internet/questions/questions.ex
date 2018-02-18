@@ -18,7 +18,7 @@ defmodule FakeInternet.Questions do
 
   """
   def list_questions do
-    Repo.all(Question)
+    Repo.all(Question) |> Repo.preload(:answers)
   end
 
   @doc """
