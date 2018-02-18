@@ -21,6 +21,13 @@ defmodule FakeInternet.Questions do
     Repo.all(Question) |> Repo.preload(:answers)
   end
 
+  def list_questions(ids) do
+    Question
+    |> where([q], q.id in ^ids)
+    |> preload(:answers)
+    |> Repo.all
+  end
+
   @doc """
   Gets a single question.
 

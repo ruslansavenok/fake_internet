@@ -3,6 +3,7 @@
 <table class="table">
   <thead>
     <tr>
+      <th>Id</th>
       <th>Question</th>
 
       <th></th>
@@ -11,6 +12,7 @@
   <tbody>
 <%= for question <- @questions do %>
     <tr>
+      <td><%= question.id %></td>
       <td><%= question.question %></td>
 
       <td class="text-right">

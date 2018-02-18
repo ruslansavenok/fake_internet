@@ -36,7 +36,10 @@ defmodule FakeInternetWeb.Admin.TestController do
 
   def show(conn, %{"id" => id}) do
     test = Tests.get_test!(id)
-    render(conn, "show.html", test: test)
+    render(conn, "show.html",
+      questions: Questions.list_questions(),
+      test: test
+    )
   end
 
   def edit(conn, %{"id" => id}) do
