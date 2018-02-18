@@ -47,7 +47,7 @@ defmodule FakeInternetWeb.Api.TestController do
          {:ok, %TestSubmission{} = submission} <- Map.merge(submission_params, %{"user_id" => user_id}) |> Tests.submit_test,
          %Test{} = test <- Tests.get_test!(submission_params["test_id"])
     do
-      render(conn, "test.json", test: test)
+      render(conn, "test_submission.json", test: test, submission: submission)
     end
   end
 end
